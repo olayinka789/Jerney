@@ -1,0 +1,12 @@
+name: Jerney CI/CD Pipeline
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+
+# set up environment variables for the workflow
+env:
+  DOCKER_REGISTRY: ghcr.io
+  BACKEND_IMAGE: ghcr.io/${{ github.repository }}/jerney-backend
+  FRONTEND_IMAGE: ghcr.io/${{ github.repository }}/jerney-frontend

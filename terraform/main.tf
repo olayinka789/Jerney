@@ -73,3 +73,23 @@ module "aks" {
     team = "platform"
   }
 }   
+
+# ---- ArgoCD (GitOps) ----
+resource "helm_release" "argocd" {
+  name             = "argocd"
+  repository       = "https://argoproj.github.io/argo-helm"
+  chart            = "argo-cd"
+  namespace        = "argocd"
+  create_namespace = true
+  version          = "7.3.0"
+
+  values = [
+    yamlencode({
+      server = {
+        extraArgs = ["--insecure"]
+      }
+    })
+  ]
+
+  depends_on = [module.aks]
+}
