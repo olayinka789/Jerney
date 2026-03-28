@@ -174,12 +174,12 @@ jobs:
         run: sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
 
       - name: Update values.yaml with new tags
+        env:
+          NEW_TAG: ${{ steps.sha.outputs.short }}
         run: |
-          NEW_TAG=${{ steps.sha.outputs.short }}
-          
-          # Update backend and frontend tags in values.yaml
-          yq eval ".backend.image.tag = "$NEW_TAG"" -i k8s-chart/values.yaml
-          yq eval ".frontend.image.tag = "$NEW_TAG"" -i k8s-chart/values.yaml
+          # Use strenv to safely pass the NEW_TAG as a string to yq
+          yq eval '.backend.image.tag = strenv(NEW_TAG)' -i k8s-chart/values.yaml
+          yq eval '.frontend.image.tag = strenv(NEW_TAG)' -i k8s-chart/values.yaml
           
           echo "✅ Updated image tags to $NEW_TAG in values.yaml"
 
