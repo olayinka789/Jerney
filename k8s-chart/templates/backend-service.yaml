@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jerney-backend
+  namespace: {{ .Values.namespace }}
+  labels:
+    app.kubernetes.io/name: jerney-backend
+    app.kubernetes.io/part-of: jerney
+    app.kubernetes.io/component: backend
+spec:
+  type: {{ .Values.backend.service.type }}
+  selector:
+    app.kubernetes.io/name: jerney-backend
+  ports:
+    - port: {{ .Values.backend.service.port }}
+      targetPort: 5000
+      protocol: TCP
