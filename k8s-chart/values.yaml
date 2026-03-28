@@ -3,7 +3,6 @@
 # Declare variables to be passed into your templates.
 
 namespace: jerney
-
 database:
   enabled: true
   replicaCount: 1
@@ -29,13 +28,12 @@ database:
     POSTGRES_USER: amVybmV5X3VzZXI=
     POSTGRES_PASSWORD: amVybmV5X3Bhc3NfMjAyNg==
     POSTGRES_DB: amVybmV5X2Ri
-
 backend:
   enabled: true
   replicaCount: 2
   image:
     repository: ghcr.io/iam-veeramalla/jerney/jerney-backend
-    tag: "75da1da"
+    tag: "ac700fc"
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -47,13 +45,12 @@ backend:
     limits:
       cpu: 300m
       memory: 256Mi
-
 frontend:
   enabled: true
   replicaCount: 2
   image:
     repository: ghcr.io/iam-veeramalla/jerney/jerney-frontend
-    tag: "75da1da"
+    tag: "ac700fc"
     pullPolicy: IfNotPresent
   service:
     type: LoadBalancer
@@ -66,10 +63,8 @@ frontend:
     limits:
       cpu: 200m
       memory: 128Mi
-
 # Global settings
 networkPolicies:
   enabled: true
-
 storageClass:
   enabled: false
