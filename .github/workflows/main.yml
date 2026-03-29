@@ -10,6 +10,9 @@ name: Jerney DevSecOps Pipeline
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - "README.md"
+      - "K8s -Chart/**"
   pull_request:
     branches: ["main"]
 
