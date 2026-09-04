@@ -12,9 +12,9 @@ on:
     branches: ["main"]
     paths-ignore:
       - "README.md"
-      - "K8s -Chart/**"
   pull_request:
     branches: ["main"]
+  workflow_dispatch: 
 
 # Security: restrict default permissions to read-only
 permissions:
